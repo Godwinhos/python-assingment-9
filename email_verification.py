@@ -22,12 +22,15 @@ def validate_email(prompt):
             main, domain = email.split("@")
             if "." not in domain:
                 raise InvalidEmailError("domain must contain '.'")
+            if "com" not in domain :
+                raise InvalidEmailError("domain must contain 'com'")
+            #return email
             should_prompt = False
         except ValueError as v:
             print(v)
         except InvalidEmailError as z:
             print(z)
-        
+
 
 
 
