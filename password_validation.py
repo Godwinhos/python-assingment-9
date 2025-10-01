@@ -8,15 +8,26 @@
 
 print("=== Task 1: Password Validator ===")
 print("Password must be at least 8 characters and contain at least one digit\n")
-
-def validate_password(prompt):
-    #
-    # Write your code here.
-    # Define WeakPasswordError class
-    # Validate password rules
-    # Handle exceptions and keep prompting
-    #
+class WeakpasswordError(Exception):
     pass
+def validate_password(prompt):
+    should_prompt =True
+    while should_prompt:
+        password = input(prompt)
+        try:
+            if not password:
+                raise ValueError("error: password cannot be empty")
+            if len(password) <8:
+                raise WeakpasswordError("error: password must be at least 8 characters")
+            if not any(char.isdigit() for char in password):
+                raise WeakpasswordError("error: password must contain at least on digit")
+            return password
+            should_prompt = False
+        except ValueError as a:
+            print(a)
+        except WeakpasswordError as b:
+            print(b)
+
 
 password = validate_password("Enter your password: ")
 print(f"Password accepted: {'*' * len(password)}")
